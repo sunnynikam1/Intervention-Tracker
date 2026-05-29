@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f1f5f9;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --muted: #475569;
+  --border: #dbe3ef;
 }
 
 @theme inline {
@@ -12,15 +15,76 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.2), transparent 35%),
+    radial-gradient(circle at 80% 15%, rgba(6, 182, 212, 0.16), transparent 35%),
+    linear-gradient(180deg, #e8edf8 0%, #dfe7f3 45%, #d6dfed 100%);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  margin: 0;
 }
 
-body {
-  background: var(--background);
+input,
+textarea,
+select {
+  background: var(--card);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  border-color: var(--border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+}
+
+.aurora-bg {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.26), transparent 32%),
+    radial-gradient(circle at 80% 15%, rgba(6, 182, 212, 0.2), transparent 34%),
+    radial-gradient(circle at 70% 85%, rgba(59, 130, 246, 0.18), transparent 36%);
+}
+
+.aurora-bg::before,
+.aurora-bg::after {
+  content: "";
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.aurora-bg::before {
+  top: -120px;
+  right: -80px;
+  background: linear-gradient(135deg, #4338ca, #06b6d4);
+  animation: floatGlow 14s ease-in-out infinite;
+}
+
+.aurora-bg::after {
+  bottom: -160px;
+  left: -120px;
+  background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+  animation: floatGlow 18s ease-in-out infinite reverse;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes floatGlow {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(14px) translateX(-10px);
+  }
 }
